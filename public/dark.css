@@ -1,0 +1,15 @@
+
+body {
+    background-color: black;
+    color: white;
+  }
+  
+  /* Dodaj inne style, jakie są potrzebne dla ciemnego wyglądu */
+  a {
+    text-decoration: none; /* Usuwa podkreślenie odnośników */
+    color: inherit; /* Dziedziczy kolor tekstu od rodzica (np. kolor czcionki z body) */
+  }
+  a:hover {
+    color: black; /* Kolor tekstu po najechaniu myszą */
+    background-color: white; /* Kolor tła po najechaniu myszą */
+  }
