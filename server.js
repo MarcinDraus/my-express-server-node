@@ -6,24 +6,22 @@ const app = express();
 const hbs = require('express-handlebars');
 app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: path.join(__dirname, 'views/layouts'), defaultLayout: 'main' }));
 app.set('view engine', 'hbs');
-//app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({ extended: false }));
+//app.use(express.json());
 
-//app.engine('.hbs', hbs());
-//app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './views/layouts', defaultLayout: 'main' }));
-// app.set('view engine', '.hbs');
-// app.set('views', path.join(__dirname, 'views/layouts'));
+app.post('/contact/send-message', (req, res) => {
 
-
-app.get('/hello/:name', (req, res) => {
-  res.render('hello', { layout: false, name: req.params.name });
-});
-
-// app.use((req, res, next) => {
-//     res.show = (name) => {
-//       res.sendFile(path.join(__dirname, `/views/${name}`));
-//     };
-//     next();
-//   });
+    const { author, sender, title, message } = req.body;
+  
+    if(author && sender && title && message) {
+      res.render('contact', { isSent: true });
+    }
+    else {
+      res.render('contact', { isError: true });
+    }
+  
+  });
+  
 
   app.use(express.static(path.join(__dirname, '/public')));
 
@@ -50,16 +48,6 @@ app.get('/hello/:name', (req, res) => {
   app.use((req, res) => {
     res.status(404).send('404 not found...');
   });
-
-  
-
-//   app.get('/style.css', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/style.css'));
-//   });
-  
-//   app.get('/test.png', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/test.png'));
-//   });
 
 app.listen(8000, () => {
   console.log('Server is running on port: 8000');
