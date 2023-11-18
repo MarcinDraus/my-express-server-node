@@ -13,10 +13,12 @@
     <h2>Contact me</h2>
 
     {{#if isSent}}
-      <div class="isSent">The message has been sent!</div>
-      {{#if imageBase64}}
-        <img src="data:image/png;base64,{{imageBase64}}" alt="Uploaded Image" width="200" height="200">
-      {{/if}}
+      <div>
+        <p class="isSent">The message has been sent!File {{ fileName }} has been saved!</p>
+        {{#if fileName}}
+          <img src="/uploads/{{ fileName }}" alt="Uploaded Image" width="200" height="200">
+        {{/if}}
+      </div>
     {{/if}}
 
     {{#if isError}}
@@ -42,11 +44,11 @@
       <button type="submit">Send message</button>
     </form>
 
-    {{#if isSent}}
+    {{!-- {{#if isSent}}
       <div class="isSent">
         <p>The message has been sent! File {{ fileName }} has been saved!</p>
       </div>
-    {{/if}}
+    {{/if}} --}}
 
     {{#if isError}}
       <div class="isError">You can't leave fields empty!</div>
